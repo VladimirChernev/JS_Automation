@@ -19,7 +19,7 @@ Before({tags: "@ignore"}, async function() {
 // After hooks run after the last step of each scenario, even when steps are failed, undefined, pending, or skipped.
 // The scenario parameter is optional, but if you use it, you can inspect the status of the scenario.
 // Hooks can be conditionally selected for execution based on the tags of the scenario.
-After({tags: '@btc'}, async function (scenario) {
+After({tags: '@ui'}, async function (scenario) {
     if (scenario.result.status === Status.FAILED) {
         try{
             if(this.debug) console.log('After Hook: '+scenario.result.status);

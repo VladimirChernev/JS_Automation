@@ -1,6 +1,6 @@
-var {setDefinitionFunctionWrapper} = require('cucumber');
-var isGenerator = require('is-generator');
-var Promise = require('bluebird');
+const {setDefinitionFunctionWrapper} = require('cucumber');
+const isGenerator = require('is-generator');
+const Promise = require('bluebird');
 
 // Definition function wrapper: If you would like to wrap step or hook definitions in with 
 // some additional logic you can use this. The definitions will be wrapped after they have all been loaded 

@@ -11,5 +11,5 @@ Feature: Google Finance UI
     Examples:
       | period | interval |
       | 1      | 10       |
-#      | 3      | 10       |
-#      | 5      | 10       |
+      | 3      | 10       |
+      | 5      | 10       |

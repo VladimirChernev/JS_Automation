@@ -1,5 +1,5 @@
 {
-  "name": "cucumber-learning",
+  "name": "cucumber-js-automation",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -39,6 +39,7 @@
     "is-generator": "^1.0.3",
     "lodash": "^4.17.21",
     "mkdirp": "^0.5.1",
+    "node-fetch": "^2.7.0",
     "require-dir": "^1.2.0"
   }
 }
