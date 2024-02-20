@@ -74,9 +74,11 @@ class GoogleFinancePage extends Page {
     async checkOverallDifference(percent) {
         if(this.world.debug) console.log('checkOverallDifference');
 
+        // get first value
         const initialValue = this.world.monitor_values.at(0)
+        // get last value
         const finalValue = this.world.monitor_values.at(this.world.monitor_values.length - 1)
-
+        // calculate percentage difference
         const percentageDiff = this.world.helper.calculatePercentageDifference(initialValue, finalValue)
 
         if(this.world.debug) console.log('initial value: ' + initialValue);
@@ -96,6 +98,7 @@ class GoogleFinancePage extends Page {
         const highestNumber = Math.max(...this.world.monitor_values);
         // get the lowest number
         const lowestNumber = Math.min(...this.world.monitor_values);
+        // calculate percentage difference
         const percentageDiff = this.world.helper.calculatePercentageDifference(highestNumber, lowestNumber)
 
         if(this.world.debug) console.log('highest number: ' + highestNumber);

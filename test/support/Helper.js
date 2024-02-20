@@ -39,7 +39,7 @@ class Helper {
      * Evaluate difference between each interval values is not greater than N percent
      * @param {int} a - first number to be compared
      * @param {int} b - second number to be compared
-     * @return {int} calculated percentage difference between the input numbers
+     * @return {any} calculated percentage difference between the input numbers
      */
     calculatePercentageDifference(a, b) {
         // Calculate Percentage Difference. Formula from https://www.mathsisfun.com/percentage-difference.html
