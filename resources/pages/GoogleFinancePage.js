@@ -62,7 +62,7 @@ class GoogleFinancePage extends Page {
 
     /**
      * Evaluate difference between initial value and final value is not greater than N percent
-     * @param {int} percent - time in minutes to monitor
+     * @param {int} percent - max allowed difference in percentage between monitored values
      */
     async checkOverallDifference(percent) {
         if(this.world.debug) console.log('checkOverallDifference');
@@ -76,16 +76,22 @@ class GoogleFinancePage extends Page {
         if(this.world.debug) console.log('initial_value: ' + A);
         if(this.world.debug) console.log('final_value: ' + B);
         if(this.world.debug) console.log('Percentage Diff: ' + percentageDiff);
-        this.world.expect(percentageDiff).to.lessThan(1)
+        this.world.expect(percentageDiff).to.lessThan(percent)
     }
 
     /**
      * Evaluate difference between each interval values is not greater than N percent
-     * @param {int} percent - time in minutes to monitor
+     * @param {int} percent - max allowed difference in percentage between monitored values
      */
     async checkIntervalsDifference(percent) {
         if(this.world.debug) console.log('checkIntervalsDifference');
 
+        const interval_values = []
+        for (let value of this.world.monitor_values) {
+            interval_values.push(parseFloat(value.replace(/,/g, '')))
+        }
+
+        if(this.world.debug) console.log("Float values: " + interval_values);
     }
 
 }

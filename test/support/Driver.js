@@ -8,7 +8,7 @@ class Driver {
      * Abstract
      */
     constructor() {
-        if( new.target == Driver ) {
+        if( new.target === Driver ) {
           throw new Error("Driver can't be instantiated directly.")
         }
     }
