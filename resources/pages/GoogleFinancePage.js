@@ -48,19 +48,18 @@ class GoogleFinancePage extends Page {
     async monitorBtcToUsdExchangeRate(period, interval) {
         if(this.world.debug) console.log('monitorBtcToUsdExchangeRate');
 
-        const iterations = Math.abs(period * 60 / interval)
         const btcToUsd = this.elements.btcToUsdBanner;
         await this.world.helper.waitFor(btcToUsd, 30);
         const el = await this.world.helper.findElement(btcToUsd);
 
         // collect all values for the required period from the ui element:
         const collected_values = []
-        for (let step = 0; step < iterations + 1; step++) {
+        for (let step = 0; step < Math.abs(period * 60 / interval) + 1; step++) {
             collected_values.push(await el.getText())
             await this.world.sleep(Math.abs(interval * 1000));
         }
 
-        // convert those values from string to float, remove comma and save them for later use:
+        // convert the collected values from string to float, remove comma and save them for later use:
         for (let value of collected_values) {
             this.world.monitor_values.push(parseFloat(value.replace(/,/g, '')))
         }
@@ -75,15 +74,14 @@ class GoogleFinancePage extends Page {
     async checkOverallDifference(percent) {
         if(this.world.debug) console.log('checkOverallDifference');
 
-        const A = this.world.monitor_values.at(0)
-        const B = this.world.monitor_values.at(this.world.monitor_values.length - 1)
+        const initialValue = this.world.monitor_values.at(0)
+        const finalValue = this.world.monitor_values.at(this.world.monitor_values.length - 1)
 
-        // Calculate Percentage Difference. Formula from https://www.mathsisfun.com/percentage-difference.html
-        const percentageDiff =  100 * Math.abs( (A - B) / ( (A + B)/2 ) );
+        const percentageDiff = this.world.helper.calculatePercentageDifference(initialValue, finalValue)
 
-        if(this.world.debug) console.log('initial_value: ' + A);
-        if(this.world.debug) console.log('final_value: ' + B);
-        if(this.world.debug) console.log('Percentage Diff: ' + percentageDiff);
+        if(this.world.debug) console.log('initial value: ' + initialValue);
+        if(this.world.debug) console.log('final value: ' + finalValue);
+        if(this.world.debug) console.log('Calculated Diff: ' + percentageDiff);
         this.world.expect(percentageDiff).to.lessThan(percent)
     }
 
@@ -94,7 +92,16 @@ class GoogleFinancePage extends Page {
     async checkIntervalsDifference(percent) {
         if(this.world.debug) console.log('checkIntervalsDifference');
 
+        // get the highest number
+        const highestNumber = Math.max(...this.world.monitor_values);
+        // get the lowest number
+        const lowestNumber = Math.min(...this.world.monitor_values);
+        const percentageDiff = this.world.helper.calculatePercentageDifference(highestNumber, lowestNumber)
 
+        if(this.world.debug) console.log('highest number: ' + highestNumber);
+        if(this.world.debug) console.log('lowest number: ' + lowestNumber);
+        if(this.world.debug) console.log('Calculated Diff: ' + percentageDiff);
+        this.world.expect(percentageDiff).to.lessThan(percent)
     }
 
 }
