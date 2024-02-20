@@ -53,10 +53,18 @@ class GoogleFinancePage extends Page {
         await this.world.helper.waitFor(btcToUsd, 30);
         const el = await this.world.helper.findElement(btcToUsd);
 
+        // collect all values for the required period from the ui element:
+        const collected_values = []
         for (let step = 0; step < iterations + 1; step++) {
-            this.world.monitor_values.push(await el.getText())
+            collected_values.push(await el.getText())
             await this.world.sleep(Math.abs(interval * 1000));
         }
+
+        // convert those values from string to float, remove comma and save them for later use:
+        for (let value of collected_values) {
+            this.world.monitor_values.push(parseFloat(value.replace(/,/g, '')))
+        }
+
         if(this.world.debug) console.log("Collected values: " + this.world.monitor_values);
     }
 
@@ -67,10 +75,10 @@ class GoogleFinancePage extends Page {
     async checkOverallDifference(percent) {
         if(this.world.debug) console.log('checkOverallDifference');
 
-        const A = parseFloat(this.world.monitor_values.at(0).replace(/,/g, ''))
-        const B = parseFloat(this.world.monitor_values.at(this.world.monitor_values.length - 1).replace(/,/g, ''))
+        const A = this.world.monitor_values.at(0)
+        const B = this.world.monitor_values.at(this.world.monitor_values.length - 1)
 
-        // I used formula for percentage difference from https://www.mathsisfun.com/percentage-difference.html
+        // Calculate Percentage Difference. Formula from https://www.mathsisfun.com/percentage-difference.html
         const percentageDiff =  100 * Math.abs( (A - B) / ( (A + B)/2 ) );
 
         if(this.world.debug) console.log('initial_value: ' + A);
@@ -86,12 +94,7 @@ class GoogleFinancePage extends Page {
     async checkIntervalsDifference(percent) {
         if(this.world.debug) console.log('checkIntervalsDifference');
 
-        const interval_values = []
-        for (let value of this.world.monitor_values) {
-            interval_values.push(parseFloat(value.replace(/,/g, '')))
-        }
 
-        if(this.world.debug) console.log("Float values: " + interval_values);
     }
 
 }
