@@ -1,0 +1,44 @@
+{
+  "name": "cucumber-learning",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "./node_modules/.bin/cucumber-js -p default -p html_report --tags \"@smoke\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nazmulb/cucumber.git"
+  },
+  "keywords": [
+    "cucumberjs",
+    "bdd",
+    "tdd",
+    "test",
+    "testing",
+    "gherkin",
+    "cucumber"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nazmulb/cucumber/issues"
+  },
+  "homepage": "https://github.com/nazmulb/cucumber#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chromedriver": "^121.0.0",
+    "cucumber": "^5.0.2",
+    "cucumber-html-reporter": "^4.0.5",
+    "geckodriver": "^1.16.0",
+    "sanitize-filename": "^1.6.1",
+    "selenium-webdriver": "^4.17.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "dotenv": "^7.0.0",
+    "is-generator": "^1.0.3",
+    "lodash": "^4.17.21",
+    "mkdirp": "^0.5.1",
+    "require-dir": "^1.2.0"
+  }
+}
