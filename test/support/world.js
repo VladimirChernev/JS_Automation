@@ -77,7 +77,7 @@ class World {
     /**
      * Convert string into HTML DOM nodes and extract data from specific DOM element
      * @param  {string} text html response body streamed as text
-     * @return {string}   extracted data from DOM element
+     * @return {string} extracted data from DOM element
      */
     static stringToHTML(text) {
         const dom = new jsdom.JSDOM(text);
