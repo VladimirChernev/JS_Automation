@@ -34,7 +34,7 @@ class World {
         this.expect = expect;
         // this.assert = assert;
 
-        this.monitor_values = []
+        this.monitoredValues = []
 
         this.screenshot = new Screenshot(this);
 
