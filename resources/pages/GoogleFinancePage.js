@@ -34,7 +34,6 @@ class GoogleFinancePage extends Page {
         await this.world.helper.waitFor(rejectAll, 30);
         const el = await this.world.helper.findElement(rejectAll);
         await el.click();
-        await this.world.sleep(2000);
 
         // now wait for the body element to be present
         await this.world.helper.waitFor('body', 30);
@@ -105,6 +104,33 @@ class GoogleFinancePage extends Page {
         if(this.world.debug) console.log('lowest number: ' + lowestNumber);
         if(this.world.debug) console.log('Calculated Diff: ' + percentageDiff);
         this.world.expect(percentageDiff).to.lessThan(percent)
+    }
+
+    /**
+     * Monitor BTC to USD exchange rate for period time and save values at every interval
+     * @param {int} period - time in minutes to monitor
+     * @param {int} interval - time in seconds between recording a new value
+     */
+    async monitorBtcToUsdExchangeRateApi(period, interval) {
+        if(this.world.debug) console.log('monitorBtcToUsdExchangeRate');
+
+        // Specify the API endpoint
+        const api_url = 'https://consent.google.com/save?gl=DE&m=0&app=0&pc=fgc&continue=https%3A%2F%2Fwww.google.com%2Ffinance%2Fquote%2FBTC-USD&x=6&bl=boq_identityfrontenduiserver_20240212.07_p1&hl=en-US&src=1&cm=2&set_eom=true';
+
+
+        // collect all values for the required period from the ui element:
+        const collected_values = []
+        for (let step = 0; step < Math.abs(period * 60 / interval) + 1; step++) {
+            collected_values.push(await this.world.getBtcToUsdPrice(api_url))
+            await this.world.sleep(Math.abs(interval * 1000));
+        }
+
+        // convert the collected values from string to float, remove comma and save them for later use:
+        for (let value of collected_values) {
+            this.world.monitor_values.push(parseFloat(value.replace(/,/g, '')))
+        }
+
+        if(this.world.debug) console.log("Collected values: " + this.world.monitor_values);
     }
 
 }

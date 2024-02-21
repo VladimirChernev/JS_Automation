@@ -8,6 +8,8 @@ const Driver = require('./Driver');
 const Screenshot = require('./Screenshot');
 const Helper = require('./Helper');
 const PageFactory = require('../../resources/PageFactory');
+const fetch = require("node-fetch");
+const jsdom = require("jsdom");
 
 //Use dotenv to read .env vars into Node
 require('dotenv').config();
@@ -72,6 +74,31 @@ class World {
      */
     sleep(milliseconds){
         return Promise.delay(milliseconds);
+    }
+
+
+    /**
+     * Make a POST request using fetch to url, extract data from specific element in the html response and save it for later use
+     * @param  {string} url url to fetch data from
+     */
+    async getBtcToUsdPrice(url) {
+        try {
+            let response = await fetch(url,{method: 'POST'});
+            const text = await response.text();
+            return World.stringToHTML(text)
+        } catch (err) {
+            console.log('Fetch error:' + err); // Error handling
+        }
+    }
+
+    /**
+     * Convert string into HTML DOM nodes and extract data from specific DOM element
+     * @param  {string} text html response body streamed as text
+     * @return {string}   extracted data from DOM element
+     */
+    static stringToHTML(text) {
+        const dom = new jsdom.JSDOM(text);
+        return dom.window.document.querySelector("div[class='YMlKec fxKbKc']").textContent
     }
 }
 

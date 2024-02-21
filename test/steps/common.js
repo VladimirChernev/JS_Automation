@@ -1,4 +1,4 @@
-const { Given, When} = require('cucumber');
+const { Given, When} = require('cucumber')
 
 Given('I navigate to the {string} page', async function (pageName) {
     this.page = this.pageFactory.create(pageName);

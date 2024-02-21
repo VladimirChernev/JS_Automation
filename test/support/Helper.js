@@ -1,4 +1,3 @@
-const _ = require('lodash');
 
 /**
  * Helper Related Methods
@@ -53,7 +52,7 @@ class Helper {
      */
     getAppUrlForEnv(env) {
         switch (env.toLowerCase()) {
-        case 'local':
+        case 'staging':
             return "https://www.google.com";
         case 'prod':
             return "https://www.google.com";
@@ -62,21 +61,21 @@ class Helper {
         }
     }
 
-    /**
-     * Load or navigate to a page with the url and check the body element is present
-     * @param {string} url - url to load
-     * @param {integer} waitInSeconds - number of seconds to wait for page to load
-     * @example
-     *      helper.loadPage('http://www.google.com');
-     */
-    async loadPage(url) {
-        await this.world.driver.get(url);
-
-        if(this.world.debug) console.log('loadPage: '+url);
-        
-        // now wait for the body element to be present
-        await this.waitFor('body');
-    }
+    // /**
+    //  * Load or navigate to a page with the url and check the body element is present
+    //  * @param {string} url - url to load
+    //  * @param {integer} waitInSeconds - number of seconds to wait for page to load
+    //  * @example
+    //  *      helper.loadPage('http://www.google.com');
+    //  */
+    // async loadPage(url) {
+    //     await this.world.driver.get(url);
+    //
+    //     if(this.world.debug) console.log('loadPage: '+url);
+    //
+    //     // now wait for the body element to be present
+    //     await this.waitFor('body');
+    // }
 
     /**
      * Wait for any element to be found
@@ -146,6 +145,5 @@ class Helper {
         await this.world.sleep(2000);
     }
 }
-
 
 module.exports = Helper;
