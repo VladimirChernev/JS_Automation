@@ -44,8 +44,8 @@ class GoogleFinancePage extends Page {
      * @param {int} period - time in minutes to monitor
      * @param {int} interval - time in seconds between recording a new value
      */
-    async monitorBtcToUsdExchangeRate(period, interval) {
-        if(this.world.debug) console.log('monitorBtcToUsdExchangeRate');
+    async monitorBtcToUsdExchangeRateUi(period, interval) {
+        if(this.world.debug) console.log('monitorBtcToUsdExchangeRateUi');
 
         const btcToUsd = this.elements.btcToUsdBanner;
         await this.world.helper.waitFor(btcToUsd, 30);
@@ -112,7 +112,7 @@ class GoogleFinancePage extends Page {
      * @param {int} interval - time in seconds between recording a new value
      */
     async monitorBtcToUsdExchangeRateApi(period, interval) {
-        if(this.world.debug) console.log('monitorBtcToUsdExchangeRate');
+        if(this.world.debug) console.log('monitorBtcToUsdExchangeRateApi');
 
         // Specify the API endpoint
         const api_url = 'https://consent.google.com/save?gl=DE&m=0&app=0&pc=fgc&continue=https%3A%2F%2Fwww.google.com%2Ffinance%2Fquote%2FBTC-USD&x=6&bl=boq_identityfrontenduiserver_20240212.07_p1&hl=en-US&src=1&cm=2&set_eom=true';

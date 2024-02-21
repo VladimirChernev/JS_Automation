@@ -5,7 +5,7 @@ Given('I click reject all cookies button', async function () {
 });
 
 When('I monitor BTC to USD exchange rate for {int} minutes every {int} seconds', {timeout: 600 * 1000}, async function (period, interval) {
-    await this.page.monitorBtcToUsdExchangeRate(period, interval);
+    await this.page.monitorBtcToUsdExchangeRateUi(period, interval);
 });
 
 Then('I check overall difference is not greater than {int} percent', async function (percent) {
