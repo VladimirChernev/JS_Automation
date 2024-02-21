@@ -15,7 +15,7 @@ npm install
 
 ### Environment Variables:
 
-- **ENVIRONMENT** - (string) test environment to target - `local` or `prod`.
+- **ENVIRONMENT** - (string) test environment to target - `staging` or `prod`.
 - **PLATFORM** - (string) browser name - `chrome` or `chromeHeadless`. Defaults to `chrome`
 - **DEFAULT_TIMEOUT** - (int) timeout after milliseconds. Defaults to `60 sec`
 - **DEBUG** - (bool) if you need to see the logs - `true` or `false`. Defaults to `false`

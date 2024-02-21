@@ -13,10 +13,10 @@ Feature: Google Finance
     Examples:
       | period | interval |
       | 1      | 10       |
-#      | 3      | 10       |
-#      | 5      | 10       |
+      | 3      | 10       |
+      | 5      | 10       |
 
-  
+
   @api
   Scenario Outline: Monitor Realtime BTC-USD through API
     When I monitor BTC to USD exchange rate using API for <period> minutes every <interval> seconds
@@ -26,5 +26,5 @@ Feature: Google Finance
     Examples:
       | period | interval |
       | 1      | 10       |
-#      | 3      | 10       |
-#      | 5      | 10       |
+      | 3      | 10       |
+      | 5      | 10       |
