@@ -15,23 +15,19 @@ class Helper {
     }
 
     /**
-     * This will return world object instance
-     * @returns {World} world object
-     * @example
-     *      helper.getWorld();
+     * Get app url for environment
+     * @param  {String} env - Environment
+     * @return {String} root url
      */
-    getWorld() {
-        return this.world;
-    }
-
-    /**
-     * This will return driver object instance
-     * @returns {WebDriver} Driver object
-     * @example
-     *      helper.getDriver();
-     */
-    getDriver() {
-        return this.world.driver;
+    getAppUrlForEnv(env) {
+        switch (env.toLowerCase()) {
+            case 'staging':
+                return "https://www.google.com";
+            case 'prod':
+                return "https://www.google.com";
+            default:
+                return "https://www.google.com";
+        }
     }
 
     /**
@@ -43,22 +39,6 @@ class Helper {
     calculatePercentageDifference(a, b) {
         // Calculate Percentage Difference. Formula from https://www.mathsisfun.com/percentage-difference.html
         return 100 * Math.abs( (a - b) / ( (a + b) /2 ) );
-    }
-
-    /**
-     * Get app url for environment
-     * @param  {String} env - Environment
-     * @return {String} root url
-     */
-    getAppUrlForEnv(env) {
-        switch (env.toLowerCase()) {
-        case 'staging':
-            return "https://www.google.com";
-        case 'prod':
-            return "https://www.google.com";
-        default:
-            return "https://www.google.com";
-        }
     }
 
     /**
@@ -118,19 +98,6 @@ class Helper {
         if(this.world.debug) console.log('findElement: '+locator);
 
         return this.world.driver.findElement(this.world.selenium.By[selector](locator));
-    }
-
-    /**
-     * Scroll to the element
-     * @param {WebElement} element - the element
-     * @example
-     *      helper.scrollToElement(el);
-     */
-    async scrollToElement(element) {
-        if(this.world.debug) console.log('scrollToElement');
-
-        await this.world.driver.executeScript('arguments[0].scrollIntoView()', element);
-        await this.world.sleep(1000);
     }
 
     /**
