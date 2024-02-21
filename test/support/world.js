@@ -1,10 +1,8 @@
 const {setWorldConstructor} = require('cucumber');
 const selenium = require('selenium-webdriver');
-const {expect, assert} = require('chai');
+const {expect} = require('chai');
 const _ = require('lodash');
-const requireDir = require('require-dir');
 const Promise = require('bluebird');
-const Driver = require('./Driver');
 const Screenshot = require('./Screenshot');
 const Helper = require('./Helper');
 const PageFactory = require('../../resources/PageFactory');
@@ -30,17 +28,13 @@ class World {
         this.pf = process.env.PLATFORM || "chrome";
         this.env = process.env.ENVIRONMENT || "local";
         this.timeout = parseInt(process.env.DEFAULT_TIMEOUT) || 60000;
-        this.debug = (process.env.DEBUG == "true" ? true : false) || false;
-
-        this.monitor_values = []
-        
-        // browser driver instance
-        this.driver = Driver.create(this.pf).build();
-        this.driver.manage().window().maximize();
+        this.debug = (process.env.DEBUG === "true") || false;
 
         this.selenium = selenium;
         this.expect = expect;
-        this.assert = assert;
+        // this.assert = assert;
+
+        this.monitor_values = []
 
         this.screenshot = new Screenshot(this);
 
@@ -51,17 +45,6 @@ class World {
     get isBrowser() {
         return _.isFunction(this.driver.manage);
     }
-    get platform() {
-        return this.pf;
-    }
-
-    get environment() {
-        return this.env;
-    }
-
-    get defaultTimeout(){
-        return this.timeout;
-    }
 
     get appUrl() {
         return this.helper.getAppUrlForEnv(this.env);
@@ -70,16 +53,16 @@ class World {
     /**
      * Sleep
      * @param {String} milliseconds - milliseconds
-     * @returns {Bluebird} return promise
+     * @returns {Promise} return promise
      */
     sleep(milliseconds){
         return Promise.delay(milliseconds);
     }
 
-
     /**
-     * Make a POST request using fetch to url, extract data from specific element in the html response and save it for later use
+     * Make a POST request using fetch to url, extract data from specific element
      * @param  {string} url url to fetch data from
+     // * @returns {string} return extracted string value
      */
     async getBtcToUsdPrice(url) {
         try {
