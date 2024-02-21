@@ -1,6 +1,7 @@
 @btc
 Feature: Google Finance
 
+
   @ui
   Scenario Outline: Monitor Realtime BTC-USD through UI
     Given I navigate to the "google finance" page
@@ -15,7 +16,7 @@ Feature: Google Finance
 #      | 3      | 10       |
 #      | 5      | 10       |
 
-
+  
   @api
   Scenario Outline: Monitor Realtime BTC-USD through API
     When I monitor BTC to USD exchange rate using API for <period> minutes every <interval> seconds

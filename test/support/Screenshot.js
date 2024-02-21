@@ -57,6 +57,6 @@ class Screenshot {
 
         if(this.world.debug) console.log('Screenshot:create: '+this.screenshotPath);
     }
-};
+}
 
 module.exports = Screenshot;

@@ -117,7 +117,6 @@ class GoogleFinancePage extends Page {
         // Specify the API endpoint
         const api_url = 'https://consent.google.com/save?gl=DE&m=0&app=0&pc=fgc&continue=https%3A%2F%2Fwww.google.com%2Ffinance%2Fquote%2FBTC-USD&x=6&bl=boq_identityfrontenduiserver_20240212.07_p1&hl=en-US&src=1&cm=2&set_eom=true';
 
-
         // collect all values for the required period from the ui element:
         const collected_values = []
         for (let step = 0; step < Math.abs(period * 60 / interval) + 1; step++) {

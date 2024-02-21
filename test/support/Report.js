@@ -20,6 +20,6 @@ class Report {
      
         reporter.generate(options);
     }
-};
+}
 
 module.exports = Report;
